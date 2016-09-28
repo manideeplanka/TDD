@@ -9,13 +9,17 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -59,6 +63,30 @@ public class UserRepositoryImplementationTest {
         verify(mUserService).findUsers(USER_LOGIN_MANIDEEP_LANKA);
         verify(mUserService).getUser(USER_LOGIN_MANIDEEP_LANKA);
         verify(mUserService).getUser(USER_LOGIN_2_MANIDEEPL);
+    }
+
+    @Test
+    public void findUsers_IOException_findUsersRetried() {
+        //Given
+        when(mUserService.findUsers(anyString())).thenReturn(getIoException(), Observable.just(githubUserList()));
+        when(mUserService.getUser(anyString())).thenReturn(Observable.just(user1FullDetails()), Observable.just(user2FullDetails()));
+
+        //When
+        TestSubscriber<List<User>> testSubscriber = new TestSubscriber<>();
+        mUserRepository.searchUsers(USER_LOGIN_MANIDEEP_LANKA).subscribe(testSubscriber);
+
+        //Then
+        testSubscriber.awaitTerminalEvent();
+        testSubscriber.assertNoErrors();
+
+        verify(mUserService, times(2)).findUsers(USER_LOGIN_MANIDEEP_LANKA);
+        verify(mUserService).getUser(USER_LOGIN_2_MANIDEEPL);
+        verify(mUserService).getUser(USER_LOGIN_MANIDEEP_LANKA);
+    }
+
+
+    private Observable getIoException() {
+        return Observable.error(new IOException());
     }
 
     private UserList githubUserList() {
