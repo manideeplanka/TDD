@@ -10,6 +10,5 @@ import rx.Observable;
  * Created by mlanka on 23-08-2016.
  */
 public interface UserRepository {
-
     Observable<List<User>> searchUsers(String searchTerm);
 }

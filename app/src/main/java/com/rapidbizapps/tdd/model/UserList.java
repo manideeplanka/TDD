@@ -17,7 +17,11 @@ public class UserList {
     private Boolean incompleteResults;
     @SerializedName("items")
     @Expose
-    private List<Item> items = new ArrayList<Item>();
+    private List<User> items = new ArrayList<>();
+
+    public UserList(List<User> githubUsers) {
+        this.items = githubUsers;
+    }
 
     /**
      * @return The totalCount
@@ -50,14 +54,14 @@ public class UserList {
     /**
      * @return The items
      */
-    public List<Item> getItems() {
+    public List<User> getItems() {
         return items;
     }
 
     /**
      * @param items The items
      */
-    public void setItems(List<Item> items) {
+    public void setItems(List<User> items) {
         this.items = items;
     }
 
