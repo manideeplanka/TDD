@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -42,6 +44,10 @@ public class FindUsersPresenterTest {
         mFindUsersPresenter.attachView(view);
     }
 
+
+    /**
+     * positive scenario when finding users
+     */
     @Test
     public void findUsers_ValidSearchTerm_ReturnsResults() {
         UserList userList = getDummyUserList();
@@ -54,6 +60,43 @@ public class FindUsersPresenterTest {
         verify(view).dismissProgress();
         verify(view).showSearchResults(userList.getItems());
         verify(view, never()).showError(anyString());
+
+    }
+
+    /**
+     * negative scenario when finding users
+     */
+    @Test
+    public void findUsers_UserRepositoryError_ShowError() {
+        String errorMessage = "ERROR ERROR ERROR";
+        //given
+        when(mUserRepository.searchUsers(anyString())).thenReturn(Observable.error(new IOException(errorMessage))); //user repository throws an error
+
+        //when
+        mFindUsersPresenter.find("manideep"); //find users
+
+        //then
+        verify(view).showProgress();
+        verify(view).dismissProgress();
+        verify(view, never()).showSearchResults(anyList());
+        verify(view).showError(errorMessage); //error message is shown
+    }
+
+
+    /**
+     * scenario - view not attached
+     */
+    @Test
+    public void findUsers_ViewNotAttached_ThrowException() {
+        //given
+        mFindUsersPresenter.detachView(); //view not attached
+
+        //when
+        mFindUsersPresenter.find("manideep"); //find users
+
+        //then
+        //no methods called, exception thrown
+        verify(view, never()).showProgress();
 
     }
 
