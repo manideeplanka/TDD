@@ -32,7 +32,7 @@ public class FindUsersPresenter extends BasePresenter<FindUsersContract.View> im
         Subscription subscription = mUserRepository.searchUsers(searchTerm).subscribeOn(ioScheduler).observeOn(mainScheduler).subscribe(new Subscriber<List<User>>() {
             @Override
             public void onCompleted() {
-                view.dismissProgress();
+//                view.dismissProgress();
             }
 
             @Override
