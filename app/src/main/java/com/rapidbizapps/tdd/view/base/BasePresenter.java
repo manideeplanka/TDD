@@ -1,47 +1,47 @@
-                                                                                                                                                                                                                                                                                                                                                                                    package com.rapidbizapps.tdd.view.base;
+package com.rapidbizapps.tdd.view.base;
 
-                                                                                                                                                                                                                                                                                                                                                                                    import rx.Subscription;
-                                                                                                                                                                                                                                                                                                                                                                                    import rx.subscriptions.CompositeSubscription;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
-                                                                                                                                                                                                                                                                                                                                                                                    /**
-                                                                                                                                                                                                                                                                                                                                                                                     * Created by mlanka on 30/9/16.
-                                                                                                                                                                                                                                                                                                                                                                                     */
+/**
+ * Created by mlanka on 30/9/16.
+ */
 
-                                                                                                                                                                                                                                                                                                                                                                                    public class BasePresenter<T extends MvpView> implements MvpPresenter<T> {
+public class BasePresenter<T extends MvpView> implements MvpPresenter<T> {
 
-                                                                                                                                                                                                                                                                                                                                                                                        private static final String LOG_TAG = "BasePresenter";
+    private static final String LOG_TAG = "BasePresenter";
 
-                                                                                                                                                                                                                                                                                                                                                                                        CompositeSubscription compositeSubscription = new CompositeSubscription();
-                                                                                                                                                                                                                                                                                                                                                                                        private T view;
+    CompositeSubscription compositeSubscription = new CompositeSubscription();
+    private T view;
 
-                                                                                                                                                                                                                                                                                                                                                                                        public void attachView(T view) {
-                                                                                                                                                                                                                                                                                                                                                                                            this.view = view;
-                                                                                                                                                                                                                                                                                                                                                                                        }
+    public void attachView(T view) {
+        this.view = view;
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                        public T getView() {
-                                                                                                                                                                                                                                                                                                                                                                                            return view;
-                                                                                                                                                                                                                                                                                                                                                                                        }
+    public T getView() {
+        return view;
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                        public void detachView() {
-                                                                                                                                                                                                                                                                                                                                                                                            compositeSubscription.clear();
-                                                                                                                                                                                                                                                                                                                                                                                            view = null;
-                                                                                                                                                                                                                                                                                                                                                                                        }
+    public void detachView() {
+        compositeSubscription.clear();
+        view = null;
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                        protected void addSubscription(Subscription subscription) {
-                                                                                                                                                                                                                                                                                                                                                                                            compositeSubscription.add(subscription);
-                                                                                                                                                                                                                                                                                                                                                                                        }
+    protected void addSubscription(Subscription subscription) {
+        compositeSubscription.add(subscription);
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                        public void checkViewAttached() {
-                                                                                                                                                                                                                                                                                                                                                                                            if (!isViewAttached()) throw new ViewNotAttachedException();
-                                                                                                                                                                                                                                                                                                                                                                                        }
+    public void checkViewAttached() {
+        if (!isViewAttached()) throw new ViewNotAttachedException();
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                        public boolean isViewAttached() {
-                                                                                                                                                                                                                                                                                                                                                                                            return view != null;
-                                                                                                                                                                                                                                                                                                                                                                                        }
+    public boolean isViewAttached() {
+        return view != null;
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                        static class ViewNotAttachedException extends RuntimeException {
-                                                                                                                                                                                                                                                                                                                                                                                            public ViewNotAttachedException() {
-                                                                                                                                                                                                                                                                                                                                                                                                super("Please call attachView(MvpView) before requesting any data from the presenter");
-                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                    }
+    public static class ViewNotAttachedException extends RuntimeException {
+        public ViewNotAttachedException() {
+            super("Please call attachView(MvpView) before requesting any data from the presenter");
+        }
+    }
+}

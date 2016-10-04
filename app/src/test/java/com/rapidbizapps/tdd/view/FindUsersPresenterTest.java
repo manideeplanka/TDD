@@ -4,6 +4,8 @@ package com.rapidbizapps.tdd.view;
 import com.rapidbizapps.tdd.data.UserRepository;
 import com.rapidbizapps.tdd.model.User;
 import com.rapidbizapps.tdd.model.UserList;
+import com.rapidbizapps.tdd.view.base.BasePresenter;
+import com.rapidbizapps.tdd.view.base.MvpPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -86,7 +88,7 @@ public class FindUsersPresenterTest {
     /**
      * scenario - view not attached
      */
-    @Test
+    @Test(expected = BasePresenter.ViewNotAttachedException.class)
     public void findUsers_ViewNotAttached_ThrowException() {
         //given
         mFindUsersPresenter.detachView(); //view not attached
