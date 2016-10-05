@@ -1,8 +1,8 @@
-package com.rapidbizapps.tdd.view;
+package com.rapidbizapps.tdd.ui.search;
 
 import com.rapidbizapps.tdd.data.UserRepository;
-import com.rapidbizapps.tdd.model.User;
-import com.rapidbizapps.tdd.view.base.BasePresenter;
+import com.rapidbizapps.tdd.data.model.User;
+import com.rapidbizapps.tdd.ui.base.BasePresenter;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class FindUsersPresenter extends BasePresenter<FindUsersContract.View> im
     Scheduler mainScheduler, ioScheduler;
     private static final String LOG_TAG = "FindUsersPresenter";
 
-    FindUsersPresenter(UserRepository userRepository, Scheduler mainScheduler, Scheduler ioScheduler) {
+    public FindUsersPresenter(UserRepository userRepository, Scheduler mainScheduler, Scheduler ioScheduler) {
         this.mainScheduler = mainScheduler;
         this.ioScheduler = ioScheduler;
         this.mUserRepository = userRepository;

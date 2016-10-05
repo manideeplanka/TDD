@@ -1,10 +1,12 @@
-package com.rapidbizapps.tdd.view;
+package com.rapidbizapps.tdd.ui.search;
 
-import com.rapidbizapps.tdd.model.User;
-import com.rapidbizapps.tdd.view.base.MvpPresenter;
-import com.rapidbizapps.tdd.view.base.MvpView;
+import com.rapidbizapps.tdd.data.model.User;
 
 import java.util.List;
+
+import com.rapidbizapps.tdd.ui.base.MvpPresenter;
+import com.rapidbizapps.tdd.ui.base.MvpView;
+
 
 /**
  * Created by mlanka on 30/9/16.

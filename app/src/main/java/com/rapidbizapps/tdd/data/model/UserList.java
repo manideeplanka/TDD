@@ -1,4 +1,4 @@
-package com.rapidbizapps.tdd.model;
+package com.rapidbizapps.tdd.data.model;
 
 
 import com.google.gson.annotations.Expose;

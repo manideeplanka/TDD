@@ -1,6 +1,7 @@
 package com.rapidbizapps.tdd.data;
 
-import com.rapidbizapps.tdd.model.User;
+import com.rapidbizapps.tdd.data.model.User;
+import com.rapidbizapps.tdd.data.remote.UserService;
 
 import java.io.IOException;
 import java.util.List;

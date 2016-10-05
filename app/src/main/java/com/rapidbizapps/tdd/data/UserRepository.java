@@ -1,6 +1,6 @@
 package com.rapidbizapps.tdd.data;
 
-import com.rapidbizapps.tdd.model.User;
+import com.rapidbizapps.tdd.data.model.User;
 
 import java.util.List;
 

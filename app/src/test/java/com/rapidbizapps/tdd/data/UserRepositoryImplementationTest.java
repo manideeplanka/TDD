@@ -1,7 +1,8 @@
 package com.rapidbizapps.tdd.data;
 
-import com.rapidbizapps.tdd.model.User;
-import com.rapidbizapps.tdd.model.UserList;
+import com.rapidbizapps.tdd.data.model.User;
+import com.rapidbizapps.tdd.data.model.UserList;
+import com.rapidbizapps.tdd.data.remote.UserService;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 

@@ -1,4 +1,4 @@
-package com.rapidbizapps.tdd.view.base;
+package com.rapidbizapps.tdd.ui.base;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;

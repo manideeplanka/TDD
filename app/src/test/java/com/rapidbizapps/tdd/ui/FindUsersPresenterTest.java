@@ -1,11 +1,12 @@
-package com.rapidbizapps.tdd.view;
+package com.rapidbizapps.tdd.ui;
 
 
 import com.rapidbizapps.tdd.data.UserRepository;
-import com.rapidbizapps.tdd.model.User;
-import com.rapidbizapps.tdd.model.UserList;
-import com.rapidbizapps.tdd.view.base.BasePresenter;
-import com.rapidbizapps.tdd.view.base.MvpPresenter;
+import com.rapidbizapps.tdd.data.model.User;
+import com.rapidbizapps.tdd.data.model.UserList;
+import com.rapidbizapps.tdd.ui.base.BasePresenter;
+import com.rapidbizapps.tdd.ui.search.FindUsersContract;
+import com.rapidbizapps.tdd.ui.search.FindUsersPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

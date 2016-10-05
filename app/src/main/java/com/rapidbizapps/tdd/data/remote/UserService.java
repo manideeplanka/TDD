@@ -1,7 +1,7 @@
-package com.rapidbizapps.tdd.data;
+package com.rapidbizapps.tdd.data.remote;
 
-import com.rapidbizapps.tdd.model.User;
-import com.rapidbizapps.tdd.model.UserList;
+import com.rapidbizapps.tdd.data.model.User;
+import com.rapidbizapps.tdd.data.model.UserList;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -19,3 +19,6 @@ public interface UserService {
     @GET("users/{username}")
     Observable<User> getUser(@Path("username") String username);
 }
+
+
+
