@@ -59,7 +59,6 @@ public class FindUsersPresenterTest {
         mFindUsersPresenter.find("manideep");
 
         verify(view).showProgress();
-        verify(view).dismissProgress();
         verify(view).showSearchResults(userList.getItems());
         verify(view, never()).showError(anyString());
 
@@ -72,7 +71,8 @@ public class FindUsersPresenterTest {
     public void findUsers_UserRepositoryError_ShowError() {
         String errorMessage = "ERROR ERROR ERROR";
         //given
-        when(mUserRepository.searchUsers(anyString())).thenReturn(Observable.error(new IOException(errorMessage))); //user repository throws an error
+        // TODO: 6/10/16 cannot resolve method!! :(
+        when(mUserRepository.searchUsers(anyString())).thenReturn(Observable.error(new Throwable(errorMessage))); //user repository throws an error
 
         //when
         mFindUsersPresenter.find("manideep"); //find users
@@ -83,7 +83,6 @@ public class FindUsersPresenterTest {
         verify(view, never()).showSearchResults(anyList());
         verify(view).showError(errorMessage); //error message is shown
     }
-
 
     /**
      * scenario - view not attached

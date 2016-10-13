@@ -4,7 +4,12 @@ import com.rapidbizapps.tdd.data.UserRepository;
 import com.rapidbizapps.tdd.data.UserRepositoryImplementation;
 import com.rapidbizapps.tdd.data.remote.UserService;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -16,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceHelper {
     private static Retrofit retrofit;
-    static String API_BASE_URL = "";
+    private static String API_BASE_URL = "https://api.github.com/";
     private static OkHttpClient okHttpClient;
     private static UserService userService;
 
@@ -26,7 +31,7 @@ public class ServiceHelper {
 
 
     public static Retrofit getRetrofit() {
-        if (retrofit != null) {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder().addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(getHttpClient())
@@ -38,7 +43,7 @@ public class ServiceHelper {
     }
 
     public static OkHttpClient getHttpClient() {
-        if (okHttpClient != null) {
+        if (okHttpClient == null) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
@@ -51,7 +56,7 @@ public class ServiceHelper {
     }
 
     public static UserService getUserService() {
-        if (userService != null) {
+        if (userService == null) {
             userService = getRetrofit().create(UserService.class);
         }
 

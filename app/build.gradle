@@ -1,4 +1,9 @@
+plugins {
+    id "me.tatarka.retrolambda" version "3.3.0"
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
@@ -11,18 +16,9 @@ android {
         versionCode 1
         versionName "1.0.0"
 
-
-        jackOptions {
-            enabled true
-        }
-
         dexOptions {
-            incremental true
             javaMaxHeapSize "4g"
         }
-
-        multiDexEnabled true
-
     }
 
     buildTypes {
@@ -46,10 +42,15 @@ android {
         abortOnError false
     }
 
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 
@@ -103,4 +104,9 @@ dependencies {
         exclude module: 'support-v4'
 
     }
+
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
 }

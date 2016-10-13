@@ -1,5 +1,7 @@
 package com.rapidbizapps.tdd.ui.search;
 
+import android.util.Log;
+
 import com.rapidbizapps.tdd.data.UserRepository;
 import com.rapidbizapps.tdd.data.model.User;
 import com.rapidbizapps.tdd.ui.base.BasePresenter;
@@ -16,7 +18,7 @@ import rx.Subscription;
 public class FindUsersPresenter extends BasePresenter<FindUsersContract.View> implements FindUsersContract.Presenter {
     UserRepository mUserRepository;
     Scheduler mainScheduler, ioScheduler;
-    private static final String LOG_TAG = "FindUsersPresenter";
+    private static final String TAG = "FindUsersPresenter";
 
     public FindUsersPresenter(UserRepository userRepository, Scheduler mainScheduler, Scheduler ioScheduler) {
         this.mainScheduler = mainScheduler;
@@ -27,18 +29,20 @@ public class FindUsersPresenter extends BasePresenter<FindUsersContract.View> im
     @Override
     public void find(String searchTerm) {
         checkViewAttached();
-        FindUsersContract.View view = getView();
-        getView().showProgress();
+        final FindUsersContract.View view = getView();
+        view.showProgress();
         Subscription subscription = mUserRepository.searchUsers(searchTerm).subscribeOn(ioScheduler).observeOn(mainScheduler).subscribe(new Subscriber<List<User>>() {
             @Override
             public void onCompleted() {
-//                view.dismissProgress();
+                view.dismissProgress();
+                Log.d(TAG, "onCompleted: ");
             }
 
             @Override
             public void onError(Throwable e) {
                 view.dismissProgress();
                 view.showError(e.getMessage());
+                e.printStackTrace();
             }
 
             @Override
