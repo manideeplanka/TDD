@@ -21,11 +21,19 @@ public class MockUserServiceImplementation implements UserService {
     List<User> userList = new ArrayList<>();
     User dummyUser1, dummyUser2;
 
+    private static Observable dummyResult;
+
     private static final String TAG = "MockUserServiceImplemen";
+
+    public static void setDummyResult(Observable dummy) {
+        dummyResult = dummy;
+    }
+
 
     public MockUserServiceImplementation() {
         dummyUser1 = new User();
         dummyUser1.setLogin("manideeplanka");
+        dummyUser1.setName("Manideep Lanka");
         dummyUser1.setAvatarUrl("http://www.nationalgeographic.com/photography/proof/2016/09/the-most-visual-science-textbook-you-ve-never-seen/#/clark-evolution-25.ngsversion.1475171232662.jpg");
         dummyUser1.setEmail("mlanka@rapidbizapps.com");
 
@@ -33,21 +41,22 @@ public class MockUserServiceImplementation implements UserService {
 
         dummyUser2 = new User();
         dummyUser2.setLogin("manideepl");
+        dummyUser2.setName("M L");
         dummyUser2.setAvatarUrl("http://www.nationalgeographic.com/photography/proof/2016/09/the-most-visual-science-textbook-you-ve-never-seen/#/clark-evolution-25.ngsversion.1475171232662.jpg");
-        dummyUser2.setEmail("manideeplanka@rapidbizapps.com");
+        dummyUser2.setEmail("manideep.dec@gmail.com");
 
         userList.add(dummyUser2);
     }
 
     @Override
     public Observable<UserList> findUsers(@Query("q") String searchTerm) {
-        Log.d(TAG, "findUsers: " + searchTerm);
+        if (dummyResult != null) return dummyResult;
+
         return Observable.just(new UserList(userList));
     }
 
     @Override
     public Observable<User> getUser(@Path("username") String username) {
-        Log.d(TAG, "getUser: " + username);
         if (username.equals("manideeplanka")) return Observable.just(dummyUser1);
         else if (username.equals("manideepl")) return Observable.just(dummyUser2);
         return Observable.just(null);

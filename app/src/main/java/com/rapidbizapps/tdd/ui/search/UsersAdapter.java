@@ -51,9 +51,6 @@ class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.CustomViewHolder> {
         holder.username_tv.setText(user.getName());
         holder.userEmail_tv.setText(user.getEmail());
         holder.userAvatar_iv.setImageURI(user.getAvatarUrl());
-        Log.d(TAG, "onBindViewHolder: " + user.getName());
-        Log.d(TAG, "onBindViewHolder: avatar url " + user.getAvatarUrl());
-        Log.d(TAG, "onBindViewHolder: email " + user.getEmail());
     }
 
     void setItems(List<User> users) {

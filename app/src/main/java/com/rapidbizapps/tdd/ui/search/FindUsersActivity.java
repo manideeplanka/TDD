@@ -100,11 +100,14 @@ public class FindUsersActivity extends AppCompatActivity implements FindUsersCon
     public void showError(String errorMessage) {
         mFindingUsers_pg.setVisibility(GONE);
         mUsers_rv.setVisibility(GONE);
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(errorMessage);
         Log.e(LOG_TAG, "showError: " + errorMessage);
     }
 
     @Override
     public void showProgress() {
+        textView.setVisibility(GONE);
         mFindingUsers_pg.setVisibility(View.VISIBLE);
         mUsers_rv.setVisibility(GONE);
     }
