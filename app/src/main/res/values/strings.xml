@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TDD</string>
+    <string name="start_typing_to_search">Start typing to search</string>
 </resources>

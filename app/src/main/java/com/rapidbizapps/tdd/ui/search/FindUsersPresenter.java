@@ -54,7 +54,6 @@ public class FindUsersPresenter extends BasePresenter<FindUsersContract.View> im
 
         addSubscription(subscription);
 
-
     }
 
 }

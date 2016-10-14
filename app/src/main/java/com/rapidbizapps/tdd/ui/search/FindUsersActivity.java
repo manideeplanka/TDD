@@ -57,6 +57,8 @@ public class FindUsersActivity extends AppCompatActivity implements FindUsersCon
         mUsers_rv.setLayoutManager(layoutManager);
         mUsers_rv.setAdapter(mUsersAdapter);
 
+
+        mFindingUsers_pg.setVisibility(View.GONE);
     }
 
     @Override
