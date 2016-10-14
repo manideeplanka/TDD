@@ -29,10 +29,11 @@ public class UserRepositoryImplementation implements UserRepository {
 
     @Override
     public Observable<List<User>> searchUsers(final String searchTerm) {
+        Log.d(TAG, "searchUsers: " + searchTerm);
         return Observable.defer(
                 () -> mUserService.findUsers(searchTerm)
-                        .concatMap(usersList -> Observable.from(usersList.getItems())
-                                .concatMap(user -> mUserService.getUser(user.getLogin()))
+                        .flatMap(usersList -> Observable.from(usersList.getItems())
+                                .flatMap(user -> mUserService.getUser(user.getLogin()))
                                 .toList())
         ).retryWhen(observable -> observable.flatMap(o -> {
             if (o instanceof IOException)

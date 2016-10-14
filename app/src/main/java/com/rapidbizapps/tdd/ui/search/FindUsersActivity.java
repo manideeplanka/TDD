@@ -5,24 +5,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.rapidbizapps.tdd.R;
-import com.rapidbizapps.tdd.data.local.ServiceHelper;
 import com.rapidbizapps.tdd.data.model.User;
-import com.rapidbizapps.tdd.data.remote.UserService;
-import com.rapidbizapps.tdd.ui.search.FindUsersContract;
+import com.rapidbizapps.tdd.data.remote.local.ServiceHelper;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
